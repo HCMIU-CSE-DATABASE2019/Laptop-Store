@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en-US">
+	<!-- <tile>Laptop Store</tile> -->
+	<head>
+		<title>Search</title>
+		<link rel="stylesheet" href="search.css">
+		<meta charset="UTF-8">
+	</head>
+	<body style="background-color: #FFFFFF">
+		<header>
+			<a id="homepagelink" href="homepage.html">
+				<h2>AZEST STORE</h2>
+			</a>
+		</header>
+
+		<center>
+			<input type="search" name="Search box">
+			<br>Laptop by CPU
+		</center>
+		
+		<hr></hr>
+		
+		<div class="row">
+			<div class="column" style="background-color:#BAE7FF;">
+				<h2>Intel</h2>
+				<p>Pentium Celeron Xeon i3 i5 i7 i9</p>
+			</div>
+			<div class="column" style="background-color:#FFBABA;">
+				<h2>AMD</h2>
+				<p>Some text..</p>
+			</div>
+		</div>
+		
+	</body>
+</html>
