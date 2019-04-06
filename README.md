@@ -1,6 +1,6 @@
 # Laptop-Store
 
-Team member:
+Team member: <br>
   Đỗ Thái Anh Huy <br>
   Phan Nhân <br>
   Trần Lê Minh Trung
