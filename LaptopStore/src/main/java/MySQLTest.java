@@ -29,6 +29,14 @@ public class MySQLTest extends HttpServlet {
             + "SELECT * FROM laptop_store.cpu\n" 
             + "RIGHT JOIN laptop_store.cpumodel ON laptop_store.cpu.cpu_model = laptop_store.cpumodel.cpu_model";
     
+    static String query2 = ""
+            + "USE laptop_store;\n" 
+            + "SELECT cpubrand.cpu_brand_name, cpu.cpu_modifier, cpumodel.*\n" 
+            + "FROM cpubrand, cpu, cpumodel\n" 
+            + "WHERE cpubrand.cpu_brand_id = cpu.cpu_brand_id AND\n" 
+            + "	cpu.cpu_model = cpumodel.cpu_model;";
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -90,15 +98,6 @@ public class MySQLTest extends HttpServlet {
                 out.println("   <td>" + rs.getString(9) + "</td>");
                 out.println("   <td>" + rs.getString(10) + "</td>");
                 out.println("</tr>");
-//                System.out.println(rs.getString(1) + "  "
-//                                + rs.getString(2) + "  " 
-//                                + rs.getString(4) + "  " 
-//                                + rs.getString(5) + "  " 
-//                                + rs.getString(6) + "  "
-//                                + rs.getString(7) + "  "
-//                                + rs.getString(8) + "  "
-//                                + rs.getString(9) + "  "
-//                                + rs.getString(10) + "  " );  	
             }
             System.out.println();
             con.close();  
