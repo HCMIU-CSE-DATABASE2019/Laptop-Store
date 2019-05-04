@@ -4,11 +4,17 @@
  * and open the template in the editor.
  */
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +28,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(urlPatterns = {"/MySQLTest"})
 public class MySQLTest extends HttpServlet {
+    static String queryFile = "src/main/java/SQL File/Show CPU Specifications.sql";
+    static String queryFile2 = "src/main/java/SQL File/Show All GPU.sql";
+    
     static String query1 = ""
             + "SELECT * FROM laptop_store.cpu\n" 
             + "LEFT JOIN laptop_store.cpumodel ON laptop_store.cpu.cpu_model = laptop_store.cpumodel.cpu_model\n" 
@@ -36,6 +45,23 @@ public class MySQLTest extends HttpServlet {
             + "WHERE cpubrand.cpu_brand_id = cpu.cpu_brand_id AND\n" 
             + "	cpu.cpu_model = cpumodel.cpu_model;";
     
+    static String query3 = "SELECT \n" +
+            "	cpubrand.cpu_brand_name AS `Brand`, \n" +
+            "    cpu.cpu_modifier AS `Modifier`,\n" +
+            "    cpu.cpu_model AS `Model`,\n" +
+            "    cpumodel.core AS `Core(s)`,\n" +
+            "    cpumodel.thread AS `Thread(s)`,\n" +
+            "    cpumodel.cpu_base_freq AS `Base frequency (GHz)`,\n" +
+            "    cpumodel.cpu_max_freq AS `Max frequency (GHz)`,\n" +
+            "    cpumodel.cache AS `L3 cache (MB)`,\n" +
+            "	integratedgpu.igpu_name AS `Integrated GPU`\n" +
+            "FROM cpubrand, cpu, cpumodel, integratedgpu\n" +
+            "WHERE\n" +
+            "	cpubrand.cpu_brand_id = cpu.cpu_brand_id AND\n" +
+            "    cpu.cpu_model = cpumodel.cpu_model AND\n" +
+            "    cpumodel.integrated_gpu = integratedgpu.igpu_id;";
+    
+    static String query4 = "SELECT * FROM gpu";
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,17 +87,6 @@ public class MySQLTest extends HttpServlet {
         //out.println("       <h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
         out.println("       <h1>Laptop's CPU Specification</h1>");
         out.println("       <table cellspacing=\"10\">");
-        out.println("           <tr>");
-        out.println("               <th>Brand ID</th>");
-        out.println("               <th>Modifier</th>");
-        out.println("               <th>Model</th>");
-        out.println("               <th>Core</th>");
-        out.println("               <th>Thread</th>");
-        out.println("               <th>Base Freq</th>");
-        out.println("               <th>Max Freq</th>");
-        out.println("               <th>Cache(MB)</th>");
-        out.println("               <th>Integrated GPU</th>");
-        out.println("           </tr>"); 
         
         try{      
             Class.forName("com.mysql.cj.jdbc.Driver");  
@@ -79,24 +94,32 @@ public class MySQLTest extends HttpServlet {
                     "jdbc:mysql://localhost:3306/laptop_store","root","tomnisa123");  	    
 
             Statement statement = con.createStatement();  
-
+            
             System.out.println("Executing SQL...");
-
-            ResultSet rs = statement.executeQuery(query1);  
-
-            System.out.println("Result");
-
+            
+            ResultSet rs = statement.executeQuery(fileToString(query1));  
+            ResultSetMetaData rsmd = rs.getMetaData();
+            
+            System.out.println("Completed");
+            
+            System.out.println(readFileAsString("App.java"));
+            int colCount = rsmd.getColumnCount();
+            
+            //Print column name
+            out.println("<tr>");
+            
+            for (int i = 1; i <= colCount; i++){    
+                out.println("   <th>" + rsmd.getColumnName(i) + "</td>");
+            }
+            out.println("</tr>");
+            
             while(rs.next()) {
                 out.println("<tr>");
-                out.println("   <td>" + rs.getString(1) + "</td>");
-                out.println("   <td>" + rs.getString(2) + "</td>");
-                out.println("   <td>" + rs.getString(4) + "</td>");
-                out.println("   <td>" + rs.getString(5) + "</td>");
-                out.println("   <td>" + rs.getString(6) + "</td>");
-                out.println("   <td>" + rs.getString(7) + "</td>");
-                out.println("   <td>" + rs.getString(8) + "</td>");
-                out.println("   <td>" + rs.getString(9) + "</td>");
-                out.println("   <td>" + rs.getString(10) + "</td>");
+                
+                for (int i = 1; i <= colCount; i++){          
+                    out.println("   <td>" + rs.getString(i) + "</td>");
+                }
+                
                 out.println("</tr>");
             }
             System.out.println();
