@@ -4,13 +4,8 @@
  * and open the template in the editor.
  */
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -97,12 +92,11 @@ public class MySQLTest extends HttpServlet {
             
             System.out.println("Executing SQL...");
             
-            ResultSet rs = statement.executeQuery(fileToString(query1));  
+            ResultSet rs = statement.executeQuery(query1);  
             ResultSetMetaData rsmd = rs.getMetaData();
             
             System.out.println("Completed");
-            
-            System.out.println(readFileAsString("App.java"));
+
             int colCount = rsmd.getColumnCount();
             
             //Print column name
