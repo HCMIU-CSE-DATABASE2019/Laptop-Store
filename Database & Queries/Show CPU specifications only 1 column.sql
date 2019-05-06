@@ -1,3 +1,4 @@
+USE laptop_store;
 SELECT 
     CONCAT(cpubrand.cpu_brand_name, ' ', 
 			cpu.cpu_modifier, ' ', 

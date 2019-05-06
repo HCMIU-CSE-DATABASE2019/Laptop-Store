@@ -1,3 +1,4 @@
+USE laptop_store;
 SELECT 
 	cpubrand.cpu_brand_name AS `Brand`, 
     cpu.cpu_modifier AS `Modifier`,
