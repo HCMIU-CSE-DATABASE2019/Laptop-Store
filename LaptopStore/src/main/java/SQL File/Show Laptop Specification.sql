@@ -1,4 +1,3 @@
-USE laptop_store;
 SELECT
 	laptop.image AS `Image`,
     
