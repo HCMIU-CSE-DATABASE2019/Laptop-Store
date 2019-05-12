@@ -8,10 +8,7 @@
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,7 +16,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,6 +60,14 @@ public class ShoppingServlet extends HttpServlet {
                 }
                 case 2: {
                     queryFile = "Option 2 - Sort by price descending.sql";
+                    break;
+                }
+                case 3: {
+                    queryFile = "Option 3 - Sort by brand name ascending.sql";
+                    break;
+                }
+                case 4: {
+                    queryFile = "Option 4 - Sort by brand name descending.sql";
                     break;
                 }
                 default: {
@@ -168,19 +172,4 @@ public class ShoppingServlet extends HttpServlet {
         }        
     }
     
-    public static String readUsingScanner(String fileName) {
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(Paths.get(fileName), StandardCharsets.UTF_8.name());
-            // we can use Delimiter regex as "\\A", "\\Z" or "\\z"
-            String data = scanner.useDelimiter("\\A").next();
-            return data;
-        } catch (IOException e) {
-            e.printStackTrace();
-                return null;
-        } finally {
-            if (scanner != null)
-                scanner.close();
-        }
-    }
 }

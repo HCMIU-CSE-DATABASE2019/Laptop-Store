@@ -57,7 +57,7 @@
                 HC Store
         </header>
              
-        <div align="center" style="padding: 0.75% 0% 0.75% 0%;">
+<!--        <div align="center" style="padding: 0.75% 0% 0.75% 0%;">
             <form method="POST" action="ShoppingServlet">  
                 <table>
                     <tr>
@@ -67,7 +67,7 @@
                     </tr>
                 </table>
             </form>
-        </div>
+        </div>-->
         
         <nav align="center" style="padding: 0.75% 0% 0.75% 0%;">
             <form method="POST" action="ShoppingServlet">  
@@ -76,6 +76,8 @@
                     <option name="sortOption" value="0">(None)</option>
                     <option name="sortOption" value="1">Price (Ascending)</option>
                     <option name="sortOption" value="2">Price (Descending)</option>
+                    <option name="sortOption" value="3">Brand (Ascending)</option>
+                    <option name="sortOption" value="4">Brand (Descending)</option>
                 </select>
                 <input id="apply-button" type="submit" value="Apply">
             </form>
