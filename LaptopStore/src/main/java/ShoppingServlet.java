@@ -133,7 +133,7 @@ public class ShoppingServlet extends HttpServlet {
             Statement statement = con.createStatement();  
 
             System.out.println("Executing SQL...");
-            
+           
             ResultSet rs = statement.executeQuery(content);  
             ResultSetMetaData rsmd = rs.getMetaData();
               

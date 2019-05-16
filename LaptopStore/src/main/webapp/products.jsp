@@ -56,18 +56,7 @@
                 padding: 10px 50px 10px 50px;">
                 HC Store
         </header>
-             
-<!--        <div align="center" style="padding: 0.75% 0% 0.75% 0%;">
-            <form method="POST" action="ShoppingServlet">  
-                <table>
-                    <tr>
-                        <td>Asus</td>
-                        <td>Dell</td>
-                        <td>Acer</td>
-                    </tr>
-                </table>
-            </form>
-        </div>-->
+            
         
         <nav align="center" style="padding: 0.75% 0% 0.75% 0%;">
             <form method="POST" action="ShoppingServlet">  
